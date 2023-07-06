@@ -3,7 +3,7 @@ import Column from '../Column/Column';
 import ColumnForm from '../ColumnForm/ColumnForm';
 import { useSelector } from 'react-redux';
 
-const List = (props) => {
+const List = () => {
      
     const columns = useSelector(state => state.columns);
 
@@ -15,9 +15,7 @@ const List = (props) => {
           <p className={styles.description}>Interesting things I want to check out</p>
           <section className={styles.columns}>
             {columns.map(column =>
-              <Column
-                key={column.id}
-                {...column}  />
+              <Column key={column.id} {...column} />
             )}
           </section>
           <ColumnForm />
