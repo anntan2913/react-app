@@ -1,6 +1,24 @@
 import { legacy_createStore as createStore } from 'redux';
 import initialState from './initialState';
 import shortid from 'shortid';
+import strContains from '../utils/strContains';
+
+//selectors
+
+//export const getFilteredCards = (state, columnId) => state.cards.filter(card => card.columnId === columnId 
+//&& card.title.toLowerCase().includes(state.searchString.toLowerCase()));          /przed destrukturyzacją!/
+
+//export const getFilteredCards = ({ cards, searchString }, columnId) => cards.filter(card => card.columnId === columnId
+//&& card.title.toLowerCase().includes(searchString.toLowerCase()));                /po destrukturyzacji!/
+
+export const getFilteredCards = ({ cards, searchString }, columnId) => cards.filter(card => card.columnId === columnId 
+  && strContains(card.title, searchString));                                    //po zastos. funkcji str.Contains/
+export const getAllColumns = state => state.columns;
+
+// action creators
+export const addColumn = payload => ({ type: 'ADD_COLUMN', payload });
+export const addCard = payload => ({ type: 'ADD_CARD', payload });
+export const updateSearchString = payload => ({ type: 'UPDATE_SEARCHSTRING', payload });
 
 const reducer = (state, action) => {
     //if(action.type === 'ADD_COLUMN') return { ...state, columns: [...state.columns, {id: shortid(), ...action.payload }]}
