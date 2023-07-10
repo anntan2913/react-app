@@ -1,0 +1,14 @@
+@import '../../styles/settings.scss';
+
+.noMatch {
+    padding: auto;
+    font-size: 24px;
+    text-transform: uppercase;    
+    text-align: center;
+
+    .subtitle {
+        text-decoration: underline;
+        font-style: italic;
+        line-height: 2;
+    }
+} 
