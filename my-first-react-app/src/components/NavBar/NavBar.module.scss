@@ -27,6 +27,10 @@
         li {
             display: inline-block;
             margin-right: 10px;
+
+            .linkActive {
+                color: $color-warning;
+            }   
         }
        
         a {
@@ -37,5 +41,7 @@
             padding: 8px;
             font-weight: 600;
         }           
-    }      
+    }  
 }
+
+ 
