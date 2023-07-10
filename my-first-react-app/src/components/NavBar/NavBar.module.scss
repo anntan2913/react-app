@@ -1,0 +1,41 @@
+@import '../../styles/settings.scss';
+
+.navbar {
+    background-color: darken($color-dark, 3%);    
+    padding: 5px 20px;
+    width: 100%;  
+    
+    .navcontent {        
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;          
+    }
+
+    i {
+        font-size: 24px;
+        color: $color-light;
+    }
+
+    .subpage  {
+        display: inline-block;      
+        list-style-type: none;         
+
+        li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+       
+        a {
+            text-decoration: none;
+            color: $color-light;        
+            font-size: 18px;
+            letter-spacing: 2px;
+            padding: 8px;
+            font-weight: 600;
+        }           
+    }      
+}
