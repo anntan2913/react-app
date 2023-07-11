@@ -14,7 +14,7 @@ const List = () => {
     //const columns = useSelector(getAllColumns);
     //const listData = useSelector(state => getListById(state, 1));    //Pobranie listy o id:1 
     const listData = useSelector(state => getListById(state, listId));
-    
+
     //const columns = useSelector(state => getColumnsByList(state, 1));
     const columns = useSelector(state => getColumnsByList(state, listId));
 
@@ -29,7 +29,7 @@ const List = () => {
               <Column key={column.id} {...column} />
             )}
           </section>
-          <ColumnForm />
+          <ColumnForm listId={listId}/>
         </div>
       );
 };
