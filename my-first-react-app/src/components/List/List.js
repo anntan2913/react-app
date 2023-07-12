@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { getListById } from '../../redux/store';
 import { getColumnsByList } from '../../redux/store';
 import { useParams } from 'react-router';
+import SearchForm from '../SearchForm/SearchForm';
 
 const List = () => {
 
@@ -24,6 +25,7 @@ const List = () => {
             <h2 className={styles.title}>{listData.title}</h2>
           </header>
           <p className={styles.description}>{listData.description}</p>
+          <SearchForm />
           <section className={styles.columns}>
             {columns.map(column =>
               <Column key={column.id} {...column} />
