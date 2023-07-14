@@ -1,33 +1,26 @@
-import { legacy_createStore as createStore } from 'redux';
+import { legacy_createStore as createStore, combineReducers } from 'redux';
 import initialState from './initialState';
-import shortid from 'shortid';
-import strContains from '../utils/strContains';
+import listsReducer from './listsRedux';
+import columnsReducer from './columnsRedux';
+import cardsReducer from './cardsRedux';
+import searchStringReducer from './searchStringRedux';
 
 //selectors
+/*
+export const getFilteredCards = (state, columnId) => state.cards.filter(card => card.columnId === columnId 
+      && card.title.toLowerCase().includes(state.searchString.toLowerCase()));          /przed destrukturyzacją!/
 
-//export const getFilteredCards = (state, columnId) => state.cards.filter(card => card.columnId === columnId 
-//&& card.title.toLowerCase().includes(state.searchString.toLowerCase()));          /przed destrukturyzacją!/
-
-//export const getFilteredCards = ({ cards, searchString }, columnId) => cards.filter(card => card.columnId === columnId
-//&& card.title.toLowerCase().includes(searchString.toLowerCase()));                /po destrukturyzacji!/
+export const getFilteredCards = ({ cards, searchString }, columnId) => cards.filter(card => card.columnId === columnId
+      && card.title.toLowerCase().includes(searchString.toLowerCase()));                /po destrukturyzacji!/
 
 export const getFilteredCards = ({ cards, searchString }, columnId) => cards.filter(card => card.columnId === columnId 
   && strContains(card.title, searchString));                                    //po zastos. funkcji str.Contains/
+*/
 
-export const getAllColumns = state => state.columns;
+// action creators - wydzielone do plików w  folderze redux
 
-export const getListById = ({ lists }, listId) => lists.find(list => list.id === listId);
-export const getColumnsByList = ({ columns }, listId) => columns.filter(column => column.listId === listId);
-export const getAllLists = state => state.lists;
-export const getSearchString = state => state.searchString;
-export const getFavoriteCards = ({ cards }) => cards.filter(card => card.isFavorite === true);
-
-// action creators
-export const addColumn = payload => ({ type: 'ADD_COLUMN', payload });
-export const addCard = payload => ({ type: 'ADD_CARD', payload });
-export const updateSearchString = payload => ({ type: 'UPDATE_SEARCHSTRING', payload });
-export const addList = payload => ({type: 'ADD_LIST', payload });
-export const toggleCardFavorite = payload => ({ type: 'TOGGLE_CARD_FAVORITE', payload });
+/*
+-zamieniamy: wykorzystanie subreducerów - poniżej:
 
 const reducer = (state, action) => {
     //if(action.type === 'ADD_COLUMN') return { ...state, columns: [...state.columns, {id: shortid(), ...action.payload }]}
@@ -46,6 +39,39 @@ const reducer = (state, action) => {
         return state;
     }    
 };
+
+0)Przygot. 4 osobnych funkcji (min-reducers) dla Lists, Columns, Cards i SearchString:
+
+3) Po zastos. 'combineReducers' wycinamy do osobnych plików w f. redux
+  const listsReducer, 
+  const columnsReducer,
+  const cardsReducer,
+  const searchStringReducer.
+
+1) Uaktualniony reducer z w/w min-reducerami:
+
+const reducer = (state, action) => {
+  const newState = {
+    lists: listsReducer(state.lists, action),
+    columns: columnsReducer(state.columns, action),
+    cards: cardsReducer(state.cards, action),
+    searchString: searchStringReducer(state.searchString, action)
+  };
+
+  return newState;
+};
+---
+2) Zamiana wpisanych na sztywno nazwaKolekcji: nazwaKolekcjiReducer(state.nazwaKolekcji, action)
+   na wykorzystanie f-cji reduxa 'combineReducers':
+*/
+const subreducers = {
+  lists: listsReducer,
+  columns: columnsReducer,
+  cards: cardsReducer,
+  searchString: searchStringReducer
+}
+
+const reducer = combineReducers(subreducers);
   
 const store = createStore(
   reducer,
