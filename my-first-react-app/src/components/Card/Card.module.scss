@@ -9,15 +9,23 @@
     border-radius: $radius;
     display: flex;
     justify-content: space-between;
-    font-weight: bold;
+    font-weight: bold;   
 }
 
+.buttons {
+    display: inline-flex;  
+}    
+
 .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
     border: none;
     background: none;
     transform: scale(1.2);  
-    cursor: pointer;
-
+    cursor: pointer;    
+    
     :hover{
         background-color: gold;
         transform: scale(1.2);
@@ -27,6 +35,9 @@
         opacity: 0.5;
         transition-duration: 2s;
     }
+    i {
+        margin-inline-end: auto;
+    }
 }
 
   .active {
@@ -34,3 +45,5 @@
     transform: scale(1.5); 
     transition: 2s;
   }
+
+  
